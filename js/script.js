@@ -17,7 +17,7 @@ $(document).ready(function(){
     function() {
   // prendo il valore dell'input
     var inputUser = $("#search_input").val();
-    console.log(inputUser);
+    
 
   });
 
