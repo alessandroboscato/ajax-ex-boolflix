@@ -24,7 +24,12 @@
       </div>
     </div>
     <script id="entry-template" type="text/x-handlebars-template">
-      <li>Titolo Titolo Originale Lingua Voto</li>
+      <li>
+        <h3>{{title}}</h3>
+        <h4>Titolo originale: "{{original_title}}"</h4>
+        <p>Lingua originale: "{{original_language}}"</p>
+        <p>Media voti: "{{vote_average}}"</p>
+      </li>
     </script>
     <!-- jquery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

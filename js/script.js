@@ -34,13 +34,23 @@ function printMovies() {
       },
       "method": "GET",
       "success": function (data) {
-        console.log(data);
+        console.log(data.results);
+        var arrayMovies = data.results.length;
         //compiliamo il template handlebars
         var source = document.getElementById("entry-template").innerHTML;
         var template = Handlebars.compile(source);
+        for(var i = 0; i < arrayMovies; i++) {
+          //contenuto template ciclato x n movies
+          var context = {
+            "title": data.results[i].title,
+            "original_title": data.results[i].original_title,
+            "original_language": data.results[i].original_language,
+            "vote_average": data.results[i].vote_average,
+          }
+          var html = template(context);
+          $("#search_results").append(html);
+        }
 
-        var context = { title: "My New Post", body: "This is my first post!" };
-        var html = template(context);
 
 
 
