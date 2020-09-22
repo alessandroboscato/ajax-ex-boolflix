@@ -17,8 +17,25 @@ $(document).ready(function(){
     function() {
   // prendo il valore dell'input
     var inputUser = $("#search_input").val();
-    
+    // lancio la chiamata ajax
+    $.ajax(
+      {
+        "url": "https://developers.themoviedb.org/3/search/movie",
+        "data": {
+          "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
+          "query": inputUser,
+          "include_adult": false
+        },
+        "method": "GET",
+        "success": function (data) {
+          console.log(data);
+        },
+        "error": function (richiesta, stato, errori) {
+        alert("E' avvenuto un errore. " + errore);
+        }
+    });
 
+    // click sul button
   });
 
 });
