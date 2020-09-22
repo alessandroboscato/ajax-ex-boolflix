@@ -12,8 +12,18 @@ $(document).ready(function(){
 // al click sul button
   $("#search_btn").click(
     function() {
+    $("#search_results").html("");
     printMovies();
     // click sul button
+  });
+
+  $("#search_input").keydown(
+    function(event) {
+      if (event.which == 13) {
+        printMovies();
+        $("#search_results").html("");
+      }
+
   });
 
 });
@@ -30,7 +40,8 @@ function printMovies() {
       "data": {
         "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
         "query": inputUser,
-        "include_adult": false
+        "include_adult": false,
+        "language": "it"
       },
       "method": "GET",
       "success": function (data) {
@@ -50,10 +61,6 @@ function printMovies() {
           var html = template(context);
           $("#search_results").append(html);
         }
-
-
-
-
       },
       "error": function (richiesta, stato, errori) {
       alert("E' avvenuto un errore. " + errore);
