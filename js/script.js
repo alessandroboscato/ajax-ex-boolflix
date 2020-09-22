@@ -4,17 +4,23 @@
 //https://developers.themoviedb.org/3 movie database
 
 // Milestone 1
-// Creare un layout base con una searchbar (una input e un button) in cui possiamo scrivere completamente o parzialmente il nome di un film. Possiamo, cliccando il  bottone, cercare sull’API tutti i film che contengono ciò che ha scritto l’utente.
+// Creare layout base con una searchbar (una input e un button) in cuiscrivere completamente o parzialmente il nome di un film. Al click cercare sull’API tutti i film contenenti quanto scritto dall'user.
 // Vogliamo dopo la risposta dell’API visualizzare a schermo i seguenti valori per ogni film trovato:
-// Titolo
-// Titolo Originale
-// Lingua
-// Voto
+// Titolo Titolo Originale Lingua Voto
 
 $(document).ready(function(){
 // al click sul button
   $("#search_btn").click(
     function() {
+    printMovies();
+    // click sul button
+  });
+
+});
+
+//-----------functions--------------
+
+function printMovies() {
   // prendo il valore dell'input
     var inputUser = $("#search_input").val();
     // lancio la chiamata ajax
@@ -29,13 +35,19 @@ $(document).ready(function(){
       "method": "GET",
       "success": function (data) {
         console.log(data);
+        //compiliamo il template handlebars
+        var source = document.getElementById("entry-template").innerHTML;
+        var template = Handlebars.compile(source);
+
+        var context = { title: "My New Post", body: "This is my first post!" };
+        var html = template(context);
+
+
+
       },
       "error": function (richiesta, stato, errori) {
       alert("E' avvenuto un errore. " + errore);
       }
       });
-
-    // click sul button
-  });
-
-});
+      $("#search_input").val("");
+}
