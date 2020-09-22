@@ -12,5 +12,13 @@
 // Voto
 
 $(document).ready(function(){
+// al click sul button
+  $("#search_btn").click(
+    function() {
+  // prendo il valore dell'input
+    var inputUser = $("#search_input").val();
+    console.log(inputUser);
+
+  });
 
 });
