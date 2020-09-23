@@ -8,3 +8,14 @@
 .w_100 {
   width: 100%
 }
+
+/* GENERAL */
+
+.flag {
+  width: 30px;
+  height: 30px;
+}
+
+.flag img {
+  width: 100%;
+}
