@@ -72,6 +72,7 @@ function renderMovies(movies) {
     var parsedVote = Math.round(movies[i].vote_average / 2);
     var starArray = [];
     checkStars(parsedVote, starArray);
+    console.log(starArray);
     var context = {
       "title": movies[i].title,
       "original_title": movies[i].original_title,
@@ -87,9 +88,8 @@ function renderMovies(movies) {
 }
 
 function checkStars(vote, array) {
-  array = [];
   var i = 0;
-  while (i < 4) {
+  while (i < 5) {
     if (i < vote) {
       var star = "fas fa-star";
       array.push(star);
@@ -99,5 +99,4 @@ function checkStars(vote, array) {
     }
     i++
   }
-  return array;
 }
