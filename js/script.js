@@ -17,6 +17,7 @@
 // https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
 
 $(document).ready(function(){
+  var flagsArray = [];
 // al click sul button
   $("#search_btn").click(
     function() {
@@ -31,7 +32,6 @@ $(document).ready(function(){
         callMovies();
         $("#search_results").html("");
       }
-
   });
 
 });
@@ -68,22 +68,28 @@ function renderMovies(movies) {
   //compiliamo il template handlebars
   var source = document.getElementById("entry-template").innerHTML;
   var template = Handlebars.compile(source);
+  Handlebars.registerHelper('isdefined', function(attribute) {
+  return attribute !== undefined;
+});
   for(var i = 0; i < movies.length; i++) {
     //compila il contenuto del template x n movies
     var parsedVote = Math.round(movies[i].vote_average / 2);
     var starArray = [];
+    var flag = movies[i].original_language;
+    flagsArray.push(flag);
+    console.log(flagsArray);
     checkStars(parsedVote, starArray);
     var context = {
       "title": movies[i].title,
       "original_title": movies[i].original_title,
       "original_language": movies[i].original_language,
       "vote_average": movies[i].vote_average,
-      "star": starArray
+      "star": starArray,
+      "flag": movies[i].original_language
     }
     //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
     $("#search_results").append(html);
-
   }
 }
 
@@ -99,4 +105,10 @@ function checkStars(vote, array) {
     }
     i++
   }
+}
+
+function checkFlags(elm, array) {
+  array = [];
+  array.push(elm);
+  return array
 }

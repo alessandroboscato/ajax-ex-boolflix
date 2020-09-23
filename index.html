@@ -39,7 +39,13 @@
             {{/each}}
           </ul>
         </div>
-        <div class="flag"><img src="img/it.svg" alt=""></div>
+        <div class="flag">
+          {{#if flag}}
+          <img src="img/{{flag}}.svg" alt="{{flag}} flag">
+          {{else}}
+          <p>Flag not present</p>
+          {{/if}}
+        </div>
       </li>
     </script>
     <!-- jquery -->
