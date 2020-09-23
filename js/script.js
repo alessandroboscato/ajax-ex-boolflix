@@ -69,6 +69,8 @@ function renderMovies(movies) {
   var template = Handlebars.compile(source);
   for(var i = 0; i < movies.length; i++) {
     //contenuto template ciclato x n movies
+    var parsedVote = Math.round(movies[i].vote_average);
+    console.log(parsedVote);
     var context = {
       "title": movies[i].title,
       "original_title": movies[i].original_title,
