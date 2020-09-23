@@ -14,6 +14,8 @@
 .flag {
   width: 30px;
   height: 30px;
+  background-image: url(../img/no-flag.png);
+  border: 1px solid black;
 }
 
 .flag img {

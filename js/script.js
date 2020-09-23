@@ -17,7 +17,6 @@
 // https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
 
 $(document).ready(function(){
-  var flagsArray = [];
 // al click sul button
   $("#search_btn").click(
     function() {
@@ -75,9 +74,6 @@ function renderMovies(movies) {
     //compila il contenuto del template x n movies
     var parsedVote = Math.round(movies[i].vote_average / 2);
     var starArray = [];
-    var flag = movies[i].original_language;
-    flagsArray.push(flag);
-    console.log(flagsArray);
     checkStars(parsedVote, starArray);
     var context = {
       "title": movies[i].title,
@@ -105,10 +101,4 @@ function checkStars(vote, array) {
     }
     i++
   }
-}
-
-function checkFlags(elm, array) {
-  array = [];
-  array.push(elm);
-  return array
 }
