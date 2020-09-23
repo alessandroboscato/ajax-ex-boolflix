@@ -11,6 +11,11 @@
 
 /* GENERAL */
 
+.col-6 h2 {
+  color: red;
+  background-color: lightgreen;
+}
+
 .flag {
   width: 30px;
   height: 30px;

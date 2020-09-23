@@ -20,6 +20,7 @@ $(document).ready(function(){
   $("#search_btn").click(
     function() {
     $("#movie_results").html("");
+    $("#series_results").html("");
     callMovies();
     callSeries();
     $("#search_input").val("");
@@ -32,6 +33,7 @@ $(document).ready(function(){
         callMovies();
         callSeries();
         $("#movie_results").html("");
+        $("#series_results").html("");
         $("#search_input").val("");
       }
   });
