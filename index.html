@@ -33,12 +33,10 @@
         <p>Lingua originale: "{{original_language}}"</p>
         <p>Media voti: "{{vote_average}}"</p>
         <div class="stars">
-          <ul id="stars">
-            <li class="list-inline d-inline"><i class="far fa-star"></i></li>
-            <li class="list-inline d-inline"><i class="far fa-star"></i></li>
-            <li class="list-inline d-inline"><i class="far fa-star"></i></li>
-            <li class="list-inline d-inline"><i class="far fa-star"></i></li>
-            <li class="list-inline d-inline"><i class="far fa-star"></i></li>
+          <ul id="stars_ratio">
+            {{#each star}}
+              <li class="list-inline d-inline"><i class="{{this}}"></i></li>
+            {{/each}}
           </ul>
         </div>
       </li>

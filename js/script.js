@@ -68,28 +68,36 @@ function renderMovies(movies) {
   var source = document.getElementById("entry-template").innerHTML;
   var template = Handlebars.compile(source);
   for(var i = 0; i < movies.length; i++) {
-    //contenuto template ciclato x n movies
+    //compila il contenuto del template x n movies
     var parsedVote = Math.round(movies[i].vote_average / 2);
-    checkStars(sayHello);
+    var starArray = [];
+    checkStars(parsedVote, starArray);
     var context = {
       "title": movies[i].title,
       "original_title": movies[i].original_title,
       "original_language": movies[i].original_language,
       "vote_average": parsedVote,
+      "star": starArray
     }
+    //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
     $("#search_results").append(html);
+
   }
 }
 
-function checkStars(callback) {
-  $("#stars li").each(
-    function() {
-      console.log($(this));
-    });
-    callback()
-};
-
-function sayHello() {
-  console.log("hello");
+function checkStars(vote, array) {
+  array = [];
+  var i = 0;
+  while (i < 4) {
+    if (i < vote) {
+      var star = "fas fa-star";
+      array.push(star);
+    } else {
+      var star = "far fa-star";
+      array.push(star);
+    }
+    i++
+  }
+  return array;
 }
