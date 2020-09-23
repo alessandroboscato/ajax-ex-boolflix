@@ -26,10 +26,28 @@
         <ul id="search_results"></ul>
       </div>
     </div>
-    <script id="entry-template" type="text/x-handlebars-template">
+    <script id="movie-template" type="text/x-handlebars-template">
       <li>
         <h3>{{title}}</h3>
         <h4>Titolo originale: "{{original_title}}"</h4>
+        <p>Lingua originale: "{{original_language}}"</p>
+        <p>Media voti utenti: "{{vote_average}}"</p>
+        <div class="stars">
+          <ul id="stars_ratio">
+            {{#each star}}
+              <li class="list-inline d-inline"><i class="{{this}}"></i></li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="flag">
+          <img src="img/{{flag}}.svg" alt="">
+        </div>
+      </li>
+    </script>
+    <script id="series-template" type="text/x-handlebars-template">
+      <li>
+        <h3>{{name}}</h3>
+        <h4>Titolo originale: "{{original_name}}"</h4>
         <p>Lingua originale: "{{original_language}}"</p>
         <p>Media voti utenti: "{{vote_average}}"</p>
         <div class="stars">

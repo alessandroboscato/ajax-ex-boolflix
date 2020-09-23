@@ -22,6 +22,8 @@ $(document).ready(function(){
     function() {
     $("#search_results").html("");
     callMovies();
+    callSeries();
+    $("#search_input").val("");
     // click sul button
   });
 
@@ -29,6 +31,7 @@ $(document).ready(function(){
     function(event) {
       if (event.which == 13) {
         callMovies();
+        callSeries();
         $("#search_results").html("");
       }
   });
@@ -53,23 +56,41 @@ function callMovies() {
       "method": "GET",
       "success": function (data) {
         renderMovies(data.results);
-        console.log(data.results);
+      },
+      "error": function () {
+      alert("E' avvenuto un errore.");
+      }
+      });
+}
 
+function callSeries() {
+  // prendo il valore dell'input
+    var inputUser = $("#search_input").val();
+    // lancio la chiamata ajax
+    $.ajax(
+      {
+      "url": "https://api.themoviedb.org/3/search/tv",
+      "data": {
+        "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
+        "query": inputUser,
+        "include_adult": false,
+        "language": "it"
+      },
+      "method": "GET",
+      "success": function (data) {
+        renderSeries(data.results);
       },
       "error": function (richiesta, stato, errori) {
       alert("E' avvenuto un errore. " + errore);
       }
       });
-      $("#search_input").val("");
 }
 
 function renderMovies(movies) {
   //compiliamo il template handlebars
-  var source = document.getElementById("entry-template").innerHTML;
+  var source = document.getElementById("movie-template").innerHTML;
   var template = Handlebars.compile(source);
-  Handlebars.registerHelper('isdefined', function(attribute) {
-  return attribute !== undefined;
-});
+
   for(var i = 0; i < movies.length; i++) {
     //compila il contenuto del template x n movies
     var parsedVote = Math.round(movies[i].vote_average / 2);
@@ -88,6 +109,29 @@ function renderMovies(movies) {
     $("#search_results").append(html);
   }
 }
+
+function renderSeries(series) {
+  var source = document.getElementById("series-template").innerHTML;
+  var template = Handlebars.compile(source);
+  for(var i = 0; i < series.length; i++) {
+    var parsedVote = Math.round(series[i].vote_average / 2);
+    var starArray = [];
+    checkStars(parsedVote, starArray);
+    var context = {
+      "name": series[i].name,
+      "original_name": series[i].original_name,
+      "original_language": series[i].original_language,
+      "vote_average": series[i].vote_average,
+      "star": starArray,
+      "flag": series[i].original_language
+    }
+    //stampa tutto l'html con tanti li quanti sono i film della ricerca
+    var html = template(context);
+    $("#search_results").append(html);
+  }
+}
+
+
 
 function checkStars(vote, array) {
   var i = 0;
