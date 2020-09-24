@@ -131,7 +131,8 @@ function renderResults(type, results) {
       "vote_average": results[i].vote_average,
       "star": starArray,
       "flag": results[i].original_language,
-      "poster": printPoster(results[i])
+      "poster": printPoster(results[i]),
+      "overview": results[i].overview
     }
     //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
