@@ -25,23 +25,20 @@ $(document).ready(function(){
 // al click sul button
   $("#search_btn").click(
     function() {
-    $("#movie_results").html("");
-    $("#series_results").html("");
+      //pulisco il contenuto dell'html e dell'input
+    resetSearch();
+    //eseguo le due chiamate ajax
     callMovies();
     callSeries();
-    $("#search_input").val("");
-    // click sul button
-  });
 
+  });
+//Idem sopra ma con il presso su invio
   $("#search_input").keydown(
-    //al press su invio
     function(event) {
       if (event.which == 13) {
+        resetSearch();
         callMovies();
         callSeries();
-        $("#movie_results").html("");
-        $("#series_results").html("");
-        $("#search_input").val("");
       }
   });
 
@@ -65,6 +62,7 @@ function callMovies() {
       },
       "method": "GET",
       "success": function (data) {
+        //passo il tipo film e il risultato della ricerca alla funzione render
         renderResults("movies", data.results);
       },
       "error": function () {
@@ -72,11 +70,9 @@ function callMovies() {
       }
       });
 }
-
+//Idem sopra per le serie tv
 function callSeries() {
-  // prendo il valore dell'input
     var inputUser = $("#search_input").val();
-    // lancio la chiamata ajax
     $.ajax(
       {
       "url": "https://api.themoviedb.org/3/search/tv",
@@ -88,7 +84,7 @@ function callSeries() {
       },
       "method": "GET",
       "success": function (data) {
-        renderResults("series", data.results);
+        renderResults("series", data.results); //importante!!
       },
       "error": function () {
       alert("E' avvenuto un errore.");
@@ -97,20 +93,19 @@ function callSeries() {
 }
 
 function renderResults(type, results) {
-  //compiliamo il template handlebars
+  //selezioniamo il template handlebars
   var source = document.getElementById("entry-template").innerHTML;
   var template = Handlebars.compile(source);
-  //compila il contenuto del template x n volte quanti sono i risultati della ricerca
+  //lo compiliamo x n volte quanti sono i risultati della ricerca
   for(var i = 0; i < results.length; i++) {
-  //calcola il numero di stelle che ciascun risutato ha preso sulla base del voto medio
-    var starArray = [];
+    //invochiamo la funzione che calcola il numero di stelle per ciascun risultato
     assignStars(results[i].vote_average, starArray);
-
+  //modifichiamo i valori a seconda del tipo di contenuto (film o serie tv)
     var title;
     var original_title;
     var container;
 
-    if (type == "movie") {
+    if (type == "movies") {
       title = results[i].title;
       original_title = results[i].original_title;
       container = $("#movie_results");
@@ -119,7 +114,7 @@ function renderResults(type, results) {
       original_title = results[i].original_name;
       container = $("#series_results");
     }
-
+//compiliamo il context
     var context = {
       "title": title,
       "original_title": original_title,
@@ -140,28 +135,14 @@ function printPoster(content) {
   return poster
 }
 
-// function renderSeries(series) {
-//   var source = document.getElementById("series-template").innerHTML;
-//   var template = Handlebars.compile(source);
-//   for(var i = 0; i < series.length; i++) {
-//     var parsedVote = Math.round(series[i].vote_average / 2);
-//     var starArray = [];
-//     checkStars(parsedVote, starArray);
-//     var context = {
-//       "name": series[i].name,
-//       "original_name": series[i].original_name,
-//       "original_language": series[i].original_language,
-//       "vote_average": series[i].vote_average,
-//       "star": starArray,
-//       "flag": series[i].original_language
-//     }
-//     //stampa tutto l'html con tanti li quanti sono i film della ricerca
-//     var html = template(context);
-//     $("#series_results").append(html);
-//   }
-// }
+function resetSearch() {
+  $("#movie_results").html("");
+  $("#series_results").html("");
+  $("#search_input").val("");
+}
 
 function assignStars(vote, array) {
+  var starArray = [];
   var parsedVote = Math.round(vote / 2);
   var i = 0;
   while (i < 5) {
