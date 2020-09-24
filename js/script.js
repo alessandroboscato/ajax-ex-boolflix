@@ -34,6 +34,7 @@ $(document).ready(function(){
   });
 
   $("#search_input").keydown(
+    //al press su invio
     function(event) {
       if (event.which == 13) {
         callMovies();
@@ -64,7 +65,7 @@ function callMovies() {
       },
       "method": "GET",
       "success": function (data) {
-        renderMovies(data.results);
+        renderResults("movies", data.results);
       },
       "error": function () {
       alert("E' avvenuto un errore.");
@@ -87,36 +88,50 @@ function callSeries() {
       },
       "method": "GET",
       "success": function (data) {
-        renderSeries(data.results);
+        renderResults("series", data.results);
       },
-      "error": function (richiesta, stato, errori) {
-      alert("E' avvenuto un errore. " + errore);
+      "error": function () {
+      alert("E' avvenuto un errore.");
       }
       });
 }
 
-function renderMovies(movies) {
+function renderResults(type, results) {
   //compiliamo il template handlebars
-  var source = document.getElementById("movie-template").innerHTML;
+  var source = document.getElementById("entry-template").innerHTML;
   var template = Handlebars.compile(source);
-
-  for(var i = 0; i < movies.length; i++) {
-    //compila il contenuto del template x n movies
-    var parsedVote = Math.round(movies[i].vote_average / 2);
+  //compila il contenuto del template x n volte quanti sono i risultati della ricerca
+  for(var i = 0; i < results.length; i++) {
+  //calcola il numero di stelle che ciascun risutato ha preso sulla base del voto medio
     var starArray = [];
-    checkStars(parsedVote, starArray);
+    assignStars(results[i].vote_average, starArray);
+
+    var title;
+    var original_title;
+    var container;
+
+    if (type == "movie") {
+      title = results[i].title;
+      original_title = results[i].original_title;
+      container = $("#movie_results");
+    } else if (type == "series") {
+      title = results[i].name;
+      original_title = results[i].original_name;
+      container = $("#series_results");
+    }
+
     var context = {
-      "title": movies[i].title,
-      "original_title": movies[i].original_title,
-      "original_language": movies[i].original_language,
-      "vote_average": movies[i].vote_average,
+      "title": title,
+      "original_title": original_title,
+      "original_language": results[i].original_language,
+      "vote_average": results[i].vote_average,
       "star": starArray,
-      "flag": movies[i].original_language,
-      "poster": printPoster(movies[i])
+      "flag": results[i].original_language,
+      "poster": printPoster(results[i])
     }
     //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
-    $("#movie_results").append(html);
+    container.append(html);
   }
 }
 
@@ -125,31 +140,32 @@ function printPoster(content) {
   return poster
 }
 
-function renderSeries(series) {
-  var source = document.getElementById("series-template").innerHTML;
-  var template = Handlebars.compile(source);
-  for(var i = 0; i < series.length; i++) {
-    var parsedVote = Math.round(series[i].vote_average / 2);
-    var starArray = [];
-    checkStars(parsedVote, starArray);
-    var context = {
-      "name": series[i].name,
-      "original_name": series[i].original_name,
-      "original_language": series[i].original_language,
-      "vote_average": series[i].vote_average,
-      "star": starArray,
-      "flag": series[i].original_language
-    }
-    //stampa tutto l'html con tanti li quanti sono i film della ricerca
-    var html = template(context);
-    $("#series_results").append(html);
-  }
-}
+// function renderSeries(series) {
+//   var source = document.getElementById("series-template").innerHTML;
+//   var template = Handlebars.compile(source);
+//   for(var i = 0; i < series.length; i++) {
+//     var parsedVote = Math.round(series[i].vote_average / 2);
+//     var starArray = [];
+//     checkStars(parsedVote, starArray);
+//     var context = {
+//       "name": series[i].name,
+//       "original_name": series[i].original_name,
+//       "original_language": series[i].original_language,
+//       "vote_average": series[i].vote_average,
+//       "star": starArray,
+//       "flag": series[i].original_language
+//     }
+//     //stampa tutto l'html con tanti li quanti sono i film della ricerca
+//     var html = template(context);
+//     $("#series_results").append(html);
+//   }
+// }
 
-function checkStars(vote, array) {
+function assignStars(vote, array) {
+  var parsedVote = Math.round(vote / 2);
   var i = 0;
   while (i < 5) {
-    if (i < vote) {
+    if (i < parsedVote) {
       var star = "fas fa-star";
       array.push(star);
     } else {
