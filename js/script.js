@@ -21,6 +21,13 @@
 // Esempio di URL che torna la copertina di PEPPA PIG:
 // https://image.tmdb.org/t/p/w185/tZgQ76hS9RFIwFyUxzctp1Pkz0N.jpg
 
+// MILESTONE 4:
+// Trasformiamo quanto fatto in una webapp con un layout completo simil-Netflix:
+// Un header che contiene logo e search bar
+// i risultati appaiono sotto forma di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio la poster_path con w342)
+// Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiuntive già prese nei punti precedenti più la overview
+// p.s. per altre aggiunte grafiche siete liberi di copiare da Netflix, ma solo dopo aver finito la base.
+
 $(document).ready(function(){
 // al click sul button
   $("#search_btn").click(
@@ -30,7 +37,7 @@ $(document).ready(function(){
     //eseguo le due chiamate ajax
     callMovies();
     callSeries();
-
+    $("#search_input").val("")
   });
 //Idem sopra ma con il presso su invio
   $("#search_input").keydown(
@@ -39,6 +46,7 @@ $(document).ready(function(){
         resetSearch();
         callMovies();
         callSeries();
+        $("#search_input").val("")
       }
   });
 
@@ -99,6 +107,7 @@ function renderResults(type, results) {
   //lo compiliamo x n volte quanti sono i risultati della ricerca
   for(var i = 0; i < results.length; i++) {
     //invochiamo la funzione che calcola il numero di stelle per ciascun risultato
+    var starArray = [];
     assignStars(results[i].vote_average, starArray);
   //modifichiamo i valori a seconda del tipo di contenuto (film o serie tv)
     var title;
@@ -131,18 +140,16 @@ function renderResults(type, results) {
 }
 
 function printPoster(content) {
-  var poster = "https://image.tmdb.org/t/p/w185/" + content.poster_path;
+  var poster = "https://image.tmdb.org/t/p/w342/" + content.poster_path;
   return poster
 }
 
 function resetSearch() {
   $("#movie_results").html("");
   $("#series_results").html("");
-  $("#search_input").val("");
 }
 
 function assignStars(vote, array) {
-  var starArray = [];
   var parsedVote = Math.round(vote / 2);
   var i = 0;
   while (i < 5) {

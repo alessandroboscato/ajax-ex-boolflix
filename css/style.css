@@ -11,9 +11,13 @@
 
 /* GENERAL */
 
-.col-6 h2 {
+.col-12 h2 {
   color: red;
   background-color: lightgreen;
+}
+
+#movie_results li, #series_results li {
+  display: inline-block;
 }
 
 .flag {
