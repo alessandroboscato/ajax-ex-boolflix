@@ -39,6 +39,7 @@ $(document).ready(function(){
     callData("tv");
     $("#search_input").val("")
   });
+
 //Idem sopra ma con il presso su invio
   $("#search_input").keydown(
     function(event) {
@@ -49,7 +50,6 @@ $(document).ready(function(){
         $("#search_input").val("")
       }
   });
-
 });
 
 //-----------functions--------------
@@ -70,8 +70,13 @@ function callData(type) {
       },
       "method": "GET",
       "success": function (data) {
-        //passo il tipo film e il risultato della ricerca alla funzione render
-        renderResults(type, data.results);
+        if (data.total_results > 0) {
+          //passo il tipo film e il risultato della ricerca alla funzione render
+          renderResults(type, data.results);
+        } else {
+          alert("La ricerca non ha prodotto risultati");
+        }
+
       },
       "error": function () {
       alert("E' avvenuto un errore.");
