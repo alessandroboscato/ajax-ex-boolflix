@@ -16,7 +16,16 @@
 .d_flex {
   display: flex;
 }
+/* typography */
 
+input::placeholder, .btn i {
+  font-size: 20px;
+}
+
+/* colors */
+.overlay, input, .btn, input::placeholder, .btn i {
+  color: #fff;
+}
 /* GENERAL */
 
 .page_wrapper {
@@ -28,6 +37,7 @@
 header {
   height: 75px;
   width: 100%;
+  /* background-color: green; */
 }
 
 nav {
@@ -36,11 +46,12 @@ nav {
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
-
 }
 
 .logo {
   max-height: 75px;
+  display: flex;
+  align-items: center;
 }
 
 .logo img {
@@ -54,16 +65,21 @@ nav {
   align-items: center;
 }
 
-input, button {
+input, .btn {
 height: 30px;
 border: 1px solid #fff;
-color: #fff;
+border-radius: 5px;
+padding: 20px;
+position: relative;
 }
 
-input::placeholder, button i {
-  font-size: 24px;
-  color: #fff;
+.btn i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 
 /* main */
 
@@ -103,7 +119,6 @@ main {
   width: 100%;
   height: 100%;
   display: none;
-  color: #fff;
   background-color: #000;
   overflow: auto;
   padding: 20px;
@@ -130,7 +145,7 @@ main {
   width: 100%;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 515px) {
   header {
     height: 115px;
   }
