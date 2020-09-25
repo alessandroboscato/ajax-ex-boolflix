@@ -17,18 +17,25 @@
 }
 
 #movie_results li, #series_results li {
+  width: calc(100%/5);
   display: inline-block;
 }
 
 .box {
   position: relative;
   max-width: 342px;
-  height: 456px;
+  max-height: 456px;
   background-color: blue;
   margin: auto;
   margin-bottom: 30px;
   overflow: hidden;
 }
+
+.box img {
+  width: 100%;
+  height: auto;
+}
+
 
 .overlay {
   position: absolute;

@@ -79,7 +79,6 @@ function callData(type) {
       });
 }
 
-
 function renderResults(type, results) {
   //selezioniamo il template handlebars
   var source = document.getElementById("entry-template").innerHTML;
