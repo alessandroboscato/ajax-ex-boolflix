@@ -68,12 +68,15 @@ main {
   overflow: auto;
 }
 
-
 #movie_results, #series_results {
   width: 100%;
   flex-wrap: nowrap;
   display: flex;
   overflow-y: auto;
+}
+
+.row h2 {
+  color: red;
 }
 
 .col-2 {
@@ -100,6 +103,14 @@ main {
   display: none;
   color: #fff;
   background-color: #000;
+  overflow: auto;
+  padding: 20px;
+}
+
+#stars_ratio {
+  display: flex;
+  list-style: none;
+  color: yellow;
 }
 
 .box:hover .overlay {

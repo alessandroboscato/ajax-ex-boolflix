@@ -74,7 +74,7 @@ function callData(type) {
           //passo il tipo film e il risultato della ricerca alla funzione render
           renderResults(type, data.results);
         } else {
-          alert("La ricerca non ha prodotto risultati");
+          alert("La ricerca non ha prodotto risultati per la seguente categoria: " + type);
         }
 
       },
