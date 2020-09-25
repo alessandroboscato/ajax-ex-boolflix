@@ -14,25 +14,34 @@
   <body>
     <div class="page_wrapper">
       <div class="container-fluid">
-        <div class="row header">
-          <nav class="navbar navbar-light bg-light w_100">
-            <img src="img/boolflix_logo.png" alt="Logo boolfix">
-            <div class="form-inline">
-              <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </div>
-          </nav>
-        </div>
-        <div class="row no-gutters main">
-          <h2>Movies</h2>
-          <div class="col-12" id="movie_results">
+        <!-- header -->
+        <div class="header">
+          <div class="row">
+            <nav class="navbar w_100">
+              <img src="img/boolflix_logo.png" alt="Logo boolfix">
+              <div class="form-inline">
+                <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </div>
+            </nav>
           </div>
-          <h2>Tv Series</h2>
-          <div class="col-12" id="series_results">
         </div>
+        <!--/header -->
+        <!-- main -->
+        <div class="main">
+          <div class="row no-gutters">
+            <h2>Movies</h2>
+            <div class="col-12" id="movie_results">
+            </div>
+            <h2>Tv Series</h2>
+            <div class="col-12" id="series_results">
+          </div>
+          </div>
         </div>
       </div>
     </div>
+    <!--/main -->
+    <!-- template handlebars -->
     <script id="entry-template" type="text/x-handlebars-template">
       <div class="col-2">
         <div class="box">
