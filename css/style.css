@@ -13,6 +13,10 @@
   background-color: #000;
 }
 
+.d_flex {
+  display: flex;
+}
+
 /* GENERAL */
 
 .page_wrapper {
@@ -29,18 +33,19 @@ header {
 nav {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
-  flex-wrap: wrap;
+
 }
 
 .logo {
-  width: 20%;
+  max-height: 75px;
 }
 
 .logo img {
   width: 100%;
-  max-height: 75px;
+  height: 100%;
 }
 
 .input {
@@ -63,9 +68,9 @@ input::placeholder, button i {
 /* main */
 
 main {
-  width: 100%;
   height: calc(100% - 75px);
   overflow: auto;
+  margin: 0 30px;
 }
 
 #movie_results, #series_results {
@@ -76,11 +81,7 @@ main {
 }
 
 .row h2 {
-  color: red;
-}
-
-.col-2 {
-  width: calc(100% / 5);
+  color: #CA3332;
 }
 
 .box {
@@ -89,6 +90,7 @@ main {
   max-height: 456px;
   margin: auto;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .box img {
@@ -126,4 +128,16 @@ main {
 
 .flag img {
   width: 100%;
+}
+
+@media screen and (max-width: 425px) {
+  header {
+    height: 115px;
+  }
+
+  .input {
+    height: 20%;
+  }
+
+
 }

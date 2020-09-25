@@ -76,7 +76,6 @@ function callData(type) {
         } else {
           alert("La ricerca non ha prodotto risultati per la seguente categoria: " + type);
         }
-
       },
       "error": function () {
       alert("E' avvenuto un errore.");
@@ -97,7 +96,7 @@ function renderResults(type, results) {
     var title;
     var original_title;
     var container;
-
+    //variamo le keys a seconda del tipo di contenuto
     if (type == "movie") {
       title = results[i].title;
       original_title = results[i].original_title;
@@ -107,6 +106,15 @@ function renderResults(type, results) {
       original_title = results[i].original_name;
       container = $("#series_results");
     }
+
+    //caso in cui non è presente l'Overview
+    var overview;
+    if (results[i].overview == "") {
+      overview = "Descizione non disponibile";
+    } else {
+      overview = results[i].overview
+    }
+
 //compiliamo il context
     var context = {
       "title": title,
@@ -116,7 +124,7 @@ function renderResults(type, results) {
       "star": starArray,
       "flag": results[i].original_language,
       "poster": printPoster(results[i]),
-      "overview": results[i].overview
+      "overview": overview
     }
     //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
