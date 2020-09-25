@@ -35,8 +35,8 @@ $(document).ready(function(){
       //pulisco il contenuto dell'html e dell'input
     resetSearch();
     //eseguo le due chiamate ajax
-    callMovies();
-    callSeries();
+    callData("movie");
+    callData("tv");
     $("#search_input").val("")
   });
 //Idem sopra ma con il presso su invio
@@ -44,8 +44,8 @@ $(document).ready(function(){
     function(event) {
       if (event.which == 13) {
         resetSearch();
-        callMovies();
-        callSeries();
+        callData("movie");
+        callData("tv");
         $("#search_input").val("")
       }
   });
@@ -55,13 +55,13 @@ $(document).ready(function(){
 //-----------functions--------------
 
 
-function callMovies() {
+function callData(type) {
   // prendo il valore dell'input
     var inputUser = $("#search_input").val();
     // lancio la chiamata ajax
     $.ajax(
       {
-      "url": "https://api.themoviedb.org/3/search/movie",
+      "url": "https://api.themoviedb.org/3/search/" + type,
       "data": {
         "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
         "query": inputUser,
@@ -71,34 +71,14 @@ function callMovies() {
       "method": "GET",
       "success": function (data) {
         //passo il tipo film e il risultato della ricerca alla funzione render
-        renderResults("movies", data.results);
+        renderResults(type, data.results);
       },
       "error": function () {
       alert("E' avvenuto un errore.");
       }
       });
 }
-//Idem sopra per le serie tv
-function callSeries() {
-    var inputUser = $("#search_input").val();
-    $.ajax(
-      {
-      "url": "https://api.themoviedb.org/3/search/tv",
-      "data": {
-        "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
-        "query": inputUser,
-        "include_adult": false,
-        "language": "it"
-      },
-      "method": "GET",
-      "success": function (data) {
-        renderResults("series", data.results); //importante!!
-      },
-      "error": function () {
-      alert("E' avvenuto un errore.");
-      }
-      });
-}
+
 
 function renderResults(type, results) {
   //selezioniamo il template handlebars
@@ -114,11 +94,11 @@ function renderResults(type, results) {
     var original_title;
     var container;
 
-    if (type == "movies") {
+    if (type == "movie") {
       title = results[i].title;
       original_title = results[i].original_title;
       container = $("#movie_results");
-    } else if (type == "series") {
+    } else if (type == "tv") {
       title = results[i].name;
       original_title = results[i].original_name;
       container = $("#series_results");
@@ -141,8 +121,13 @@ function renderResults(type, results) {
 }
 
 function printPoster(content) {
-  var poster = "https://image.tmdb.org/t/p/w342/" + content.poster_path;
-  return poster
+  if (content.poster_path == null) {
+    var poster = "img/no_poster.png";
+    return poster;
+  } else {
+    var poster = "https://image.tmdb.org/t/p/w342/" + content.poster_path;
+    return poster;
+  }
 }
 
 function resetSearch() {
