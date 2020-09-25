@@ -12,29 +12,29 @@
     <title>Boolfix</title>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="navbar navbar-light bg-light w_100">
-          <h2  href="#" class="navbar-brand">Boolfix</h2>
-          <div class="form-inline">
-            <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </div>
-        </nav>
-      </div>
-      <div class="row no-gutters">
-        <div class="col-12">
-          <h2>Movies</h2>
-          <ul id="movie_results"></ul>
+    <div class="page_wrapper">
+      <div class="container-fluid">
+        <div class="row header">
+          <nav class="navbar navbar-light bg-light w_100">
+            <img src="img/boolflix_logo.png" alt="Logo boolfix">
+            <div class="form-inline">
+              <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+          </nav>
         </div>
-        <div class="col-12">
+        <div class="row no-gutters main">
+          <h2>Movies</h2>
+          <div class="col-12" id="movie_results">
+          </div>
           <h2>Tv Series</h2>
-          <ul id="series_results"></ul>
+          <div class="col-12" id="series_results">
+        </div>
         </div>
       </div>
     </div>
     <script id="entry-template" type="text/x-handlebars-template">
-      <li>
+      <div class="col-2">
         <div class="box">
           <div class="overlay">
             <h3>{{title}}</h3>
@@ -55,7 +55,7 @@
           </div>
           <img src="{{poster}}" alt="{{title}}">
         </div>
-      </li>
+      </div>
     </script>
     <!-- jquery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

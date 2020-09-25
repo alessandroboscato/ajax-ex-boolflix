@@ -11,14 +11,28 @@
 
 /* GENERAL */
 
-.col-12 h2 {
-  color: red;
-  background-color: lightgreen;
+.page_wrapper {
+  height: 100vh;
 }
 
-#movie_results li, #series_results li {
-  width: calc(100%/5);
-  display: inline-block;
+/* header */
+.header, .header img {
+  height: 64px;
+}
+
+/* main */
+
+.main {
+  height: calc(100% - 64px);
+}
+.no_gutters {
+  overflow-y: auto;
+  height: 100% - 64px;
+}
+
+#movie_results, #series_results {
+  display: flex;
+  overflow-y: auto;
 }
 
 .box {
@@ -35,7 +49,6 @@
   width: 100%;
   height: auto;
 }
-
 
 .overlay {
   position: absolute;
