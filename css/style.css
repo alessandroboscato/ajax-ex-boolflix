@@ -24,8 +24,6 @@
 header {
   height: 75px;
   width: 100%;
-  position: fixed;
-  background-color: blue;
 }
 
 nav {
@@ -54,6 +52,7 @@ nav {
 input, button {
 height: 30px;
 border: 1px solid #fff;
+color: #fff;
 }
 
 input::placeholder, button i {
@@ -63,23 +62,27 @@ input::placeholder, button i {
 
 /* main */
 
-.main {
-  height: calc(100% - 64px);
+main {
+  width: 100%;
+  height: calc(100% - 75px);
   overflow: auto;
 }
-.no_gutters {
-  overflow-y: auto;
-  height: 100% - 64px;
-}
+
 
 #movie_results, #series_results {
+  width: 100%;
+  flex-wrap: nowrap;
   display: flex;
   overflow-y: auto;
 }
 
+.col-2 {
+  width: calc(100% / 5);
+}
+
 .box {
   position: relative;
-  max-width: 342px;
+  width: 342px;
   max-height: 456px;
   margin: auto;
   overflow: hidden;
