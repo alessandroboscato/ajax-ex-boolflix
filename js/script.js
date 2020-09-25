@@ -77,10 +77,13 @@ function callData(type) {
       "method": "GET",
       "success": function (data) {
         if (data.total_results > 0) {
+          $("h2."+type).show();
           //passo il tipo film e il risultato della ricerca alla funzione render
           renderResults(type, data.results);
         } else {
           alert("La ricerca non ha prodotto risultati per la seguente categoria: " + type);
+          //cancella il titolo della categoria non trovata
+          $("h2."+type).hide();
         }
       },
       "error": function () {
@@ -120,6 +123,10 @@ function renderResults(type, results) {
     } else {
       overview = results[i].overview
     }
+
+    //funzione che stampa gli attori
+    var idMovie = results[i].id;
+    console.log(idMovie);
 
 //compiliamo il context
     var context = {

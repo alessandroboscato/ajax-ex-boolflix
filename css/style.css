@@ -98,6 +98,7 @@ main {
 
 .row h2 {
   color: #CA3332;
+  display: none;
 }
 
 .box {
