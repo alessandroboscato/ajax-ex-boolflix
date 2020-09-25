@@ -9,6 +9,10 @@
   width: 100%
 }
 
+.bg_black {
+  background-color: #000;
+}
+
 /* GENERAL */
 
 .page_wrapper {
@@ -16,12 +20,45 @@
 }
 
 /* header */
-.header, .header img {
-  height: 64px;
+
+header {
+  height: 75px;
+  width: 100%;
+  position: fixed;
+  background-color: blue;
 }
 
-.navbar {
-  padding: 0;
+nav {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 20%;
+}
+
+.logo img {
+  width: 100%;
+  max-height: 75px;
+}
+
+.input {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+input, button {
+height: 30px;
+border: 1px solid #fff;
+}
+
+input::placeholder, button i {
+  font-size: 24px;
+  color: #fff;
 }
 
 /* main */
@@ -44,7 +81,6 @@
   position: relative;
   max-width: 342px;
   max-height: 456px;
-  background-color: blue;
   margin: auto;
   overflow: hidden;
 }
