@@ -29,7 +29,15 @@
 // p.s. per altre aggiunte grafiche siete liberi di copiare da Netflix, ma solo dopo aver finito la base.
 
 // Milestone 5 (Opzionale):
-// Partendo da un film o da una serie, richiedere all'API quali sono gli attori che fanno parte del cast aggiungendo alla nostra scheda Film / Serie SOLO i primi 5 restituiti dall’API con Nome e Cognome, e i generi associati al film con questo schema: “Genere 1, Genere 2, …”.
+// Partendo da un film o da una serie, richiedere all'API quali sono gli attori che fanno parte del cast aggiungendo alla nostra scheda SOLO i primi 5 restituiti dall’API con Nome e Cognome,
+// e i generi associati al film con questo schema: “Genere 1, Genere 2, …”.
+
+//1 prendo i genre_ids (array contentente degli interi)
+//2 chiamata api per la lista dei generi (occhio che ci sono delle differenze tra movie e tv)
+// https://developers.themoviedb.org/3/genres/get-movie-list
+// https://developers.themoviedb.org/3/genres/get-tv-list
+//3 ciclo l'array dei generi per n generi del film/serie in questione e stampo la chiave "name" associata all'id
+
 // Milestone 6 (Opzionale):
 // Creare una lista di generi richiedendo quelli disponibili all'API e creare dei filtri con i generi tv e movie per mostrare/nascondere le schede ottenute con la ricerca.
 
@@ -123,10 +131,6 @@ function renderResults(type, results) {
     } else {
       overview = results[i].overview
     }
-
-    //funzione che stampa gli attori
-    var idMovie = results[i].id;
-    console.log(idMovie);
 
 //compiliamo il context
     var context = {
