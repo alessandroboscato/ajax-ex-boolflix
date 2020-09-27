@@ -69,7 +69,19 @@
               </ul>
             </div>
             <details>
-              <summary><strong>Overview</strong></summary>
+              <summary><strong>Anteprima</strong></summary>
+              <ul>
+                {{#each cast}}
+                  <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </details>
+            <details>
+              <summary><strong>Cast</strong></summary>
+              <p>{{overview}}</p>
+            </details>
+            <details>
+              <summary><strong>Generi</strong></summary>
               <p>{{overview}}</p>
             </details>
           </div>

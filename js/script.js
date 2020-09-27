@@ -29,7 +29,7 @@
 // p.s. per altre aggiunte grafiche siete liberi di copiare da Netflix, ma solo dopo aver finito la base.
 
 // Milestone 5 (Opzionale):
-// Partendo da un film o da una serie, richiedere all'API quali sono gli attori che fanno parte del cast aggiungendo alla nostra scheda SOLO i primi 5 restituiti dall’API con Nome e Cognome,
+// Chiedere all'API quali sono gli attori che fanno parte del cast aggiungendo alla nostra scheda SOLO i primi 5 restituiti dall’API con Nome e Cognome,
 // e i generi associati al film con questo schema: “Genere 1, Genere 2, …”.
 
 //1 prendo i genre_ids (array contentente degli interi)
@@ -141,6 +141,8 @@ function renderResults(type, results) {
     } else {
       overview = results[i].overview
     }
+    var castArray = ["1"];
+    printCast(type, results[i].id);
 
 //compiliamo il context
     var context = {
@@ -151,12 +153,45 @@ function renderResults(type, results) {
       "star": starArray,
       "flag": results[i].original_language,
       "poster": printPoster(results[i]),
-      "overview": overview
+      "overview": overview,
+      "cast": castArray
     }
     //stampa tutto l'html con tanti li quanti sono i film della ricerca
     var html = template(context);
     container.append(html);
   }
+}
+
+function printCast(type, idResult) {
+  $.ajax(
+    {
+    "url": "https://api.themoviedb.org/3/" + type + "/" + idResult + "/credits",
+    "data": {
+      "api_key": "02a1201f97c8df2c585d649e1fd9e3fe",
+    },
+    "method": "GET",
+    "success": function(data) {
+
+      var casting = data.cast;
+      for (var j = 0; j < 5; j++) {
+        console.log(casting[j].id);
+        $.ajax(
+          {
+          "url": "https://api.themoviedb.org/3/person/" + casting[j].id + "?api_key=02a1201f97c8df2c585d649e1fd9e3fe",
+          "method": "GET",
+          "success": function (data) {
+            castArray.push(data.name);
+          },
+          "error": function () {
+          alert("E' avvenuto un errore.");
+          }
+        })
+      }
+    },
+    "error": function () {
+    alert("E' avvenuto un errore.");
+    }
+  })
 }
 
 function printPoster(content) {
