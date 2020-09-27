@@ -64,10 +64,20 @@ $(document).ready(function(){
         $("#search_input").val("")
       }
   });
+
+  $(document).on("mouseenter", ".box",
+  function (){
+    $(this).find(".overlay").slideDown();
+  });
+
+  $(document).on("mouseleave", ".box",
+  function (){
+    $(this).find(".overlay").hide();
+  });
+
 });
 
 //-----------functions--------------
-
 
 function callData(type) {
   // prendo il valore dell'input
